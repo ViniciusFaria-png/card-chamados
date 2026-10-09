@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards de chamados</title>
     <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <script src="chamados.js" defer></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
     <form id="filtro" class="filtro">
         <div id="inputs-filtro" class="inputs-filtro">
-            <input type="text" id="input-nome" placeholder="Digite o nome do funcionário">
+            <input type="text" id="input-nome" placeholder="Digite o nome do chamado">
+
+            <select id="select-prioridade">
+                <option value="">Todas as prioridades</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta</option>
+                <option value="Crítica">Crítica</option>
+            </select>
+
+            <select id="select-status">
+                <option value="">Todos os status</option>
+                <option value="Aberto">Aberto</option>
+                <option value="Em progresso">Em progresso</option>
+                <option value="Fechado">Fechado</option>
+            </select>
         </div>
         <div id="botoes-filtrar" class="botoes-filtrar">
             <button id="btn-filtrar" type="button">
@@ -22,6 +38,6 @@
         </div>
 
     </form>
-    <div class="funcionarios-container"id="funcionarios-container"></div>
+    <div class="chamados-container" id="chamados-container"></div>
 </body>
 </html>
