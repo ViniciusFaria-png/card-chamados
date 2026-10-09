@@ -1,6 +1,7 @@
 'use strict'
 
-const inputNome = document.getElementById('input-nome')
+const inputChamado = document.getElementById('input-chamado')
+const inputUsuario = document.getElementById('input-usuario')
 const selectPrioridade = document.getElementById('select-prioridade')
 const selectStatus = document.getElementById('select-status')
 
@@ -63,18 +64,21 @@ function carregarChamados(chamadosParaExibir) {
 }
 
 function filtrarChamados() {
-    const nomeFiltro = normalizarFiltro(inputNome.value)
+    const chamadoFiltro = normalizarFiltro(inputChamado.value)
+    const usuarioFiltro = normalizarFiltro(inputUsuario.value)
     const prioridadeFiltro = selectPrioridade.value
     const statusFiltro = selectStatus.value
 
     const chamadosFiltrados = chamados.filter(chamado => {
         const tituloChamado = normalizarFiltro(chamado.titulo)
+        const usuarioChamado = normalizarFiltro(chamado.usuario)
 
-        const bateuNome = nomeFiltro === '' || tituloChamado.includes(nomeFiltro)
+        const bateuChamado = chamadoFiltro === '' || tituloChamado.includes(chamadoFiltro)
+        const bateuUsuario = usuarioFiltro === '' || usuarioChamado.includes(usuarioFiltro)
         const bateuPrioridade = prioridadeFiltro === '' || chamado.prioridade === prioridadeFiltro
         const bateuStatus = statusFiltro === '' || chamado.status === statusFiltro
 
-        return bateuNome && bateuPrioridade && bateuStatus
+        return bateuChamado && bateuUsuario && bateuPrioridade && bateuStatus
     })
 
     carregarChamados(chamadosFiltrados)
@@ -83,14 +87,16 @@ function filtrarChamados() {
 botaoFiltrar.onclick = () => filtrarChamados()
 
 botaoLimpar.onclick = () => {
-    inputNome.value = ''
+    inputChamado.value = ''
+    inputUsuario.value = ''
     selectPrioridade.value = ''
     selectStatus.value = ''
     carregarChamados(chamados)
 }
 
 // Filtro em tempo real ao digitar ou alterar selects
-inputNome.onkeyup = () => filtrarChamados()
+inputChamado.onkeyup = () => filtrarChamados()
+inputUsuario.onkeyup = () => filtrarChamados()
 selectPrioridade.onchange = () => filtrarChamados()
 selectStatus.onchange = () => filtrarChamados()
 
